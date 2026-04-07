@@ -1,6 +1,6 @@
 /**
- * Ways To — shared deck content for the vintage slot machine.
- * Loaded before vintage-slot-machine.js
+ * Ways To — shared deck content for the slot machine.
+ * Loaded before slot-machine.js
  */
 (function (global) {
     "use strict";

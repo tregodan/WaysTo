@@ -31,6 +31,10 @@
         saveStatus: document.getElementById("saveStatus"),
     };
 
+    if (!els.reelBank || !els.constraintsPlusToggle || !els.lever || !els.spinButton || !els.saveButton || !els.saveStatus) {
+        return;
+    }
+
     function placeholderCards(prefix) {
         const result = [];
         for (let i = 1; i <= 24; i++) {
@@ -183,7 +187,7 @@
             return;
         }
 
-        saver(payload, { source: "vintage" }).then((result) => {
+        saver(payload, { source: "slot_machine" }).then((result) => {
             const id = result.saveCode ? " Save ID: " + result.saveCode + "." : "";
             if (result.remote) {
                 els.saveStatus.textContent = "Saved on this device and in Supabase." + id;
