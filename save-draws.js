@@ -136,7 +136,7 @@
 
     /**
      * @param {object} payload - Same shape your pages already build (savedAt, cards, etc.)
-     * @param {{ source: string }} meta - Short id for which UI saved (e.g. "main", "variation", "vintage")
+     * @param {{ source: string }} meta - Short id for which UI saved (e.g. "vintage")
      * @returns {Promise<{ ok: boolean, local: boolean, remote: boolean, saveCode: string, remoteError?: string }>}
      */
     global.saveWaysToDraw = function (payload, meta) {
