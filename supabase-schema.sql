@@ -1,3 +1,8 @@
+-- Main database setup for the Ways To app.
+-- Creates the 'saved_draws' table to store saved slot machine results.
+-- Adds indexes for quick searches by date and source.
+-- Enables security to protect data, and allows anonymous users to save draws (but not view them).
+
 create table if not exists public.saved_draws (
     save_code text primary key,
     created_at timestamptz not null default now(),

@@ -1,4 +1,9 @@
 
+-- Migration script to update the Ways To database from version 1.
+-- WARNING: This deletes the old 'saved_draws' table and all its data.
+-- Then recreates the table with the latest structure (e.g., new columns).
+-- Adds an index for faster queries by creation date.
+
 drop policy if exists "saved_draws_anon_insert" on public.saved_draws;
 drop policy if exists "saved_draws_anon_no_select" on public.saved_draws;
 drop table if exists public.saved_draws;
