@@ -1,7 +1,7 @@
 (function () {
     "use strict";
 
-    let CARD_HEIGHT = 138; // Default fallback
+    let CARD_HEIGHT = 138;
     const COPIES = 12;
     const MID_COPY = 5;
     const LEVER_MAX = 62;
@@ -15,7 +15,6 @@
                 const newHeight = sampleCard.offsetHeight;
                 if (newHeight > 0 && Math.abs(newHeight - CARD_HEIGHT) > 1) {
                     CARD_HEIGHT = newHeight;
-                    // Re-position all strips with new height
                     state.reels.forEach(reel => {
                         if (reel.strip) {
                             const len = reel.deck.values.length;
