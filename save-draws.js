@@ -23,11 +23,7 @@
             .replace(/^-+|-+$/g, "") || "unknown";
         return s.slice(0, 24);
     }
-
-    /**
-     * Human-readable save id, e.g. WT-20260404-153045-main-K4JQ
-     * (Ways To, date, time, which UI, short random tail so same-second saves stay unique).
-     */
+    
     function newSaveCode(source) {
         const d = new Date();
         const y = d.getFullYear();
@@ -128,11 +124,7 @@
         });
     }
 
-    /**
-     * @param {object} payload - Same shape your pages already build (savedAt, cards, etc.)
-     * @param {{ source: string }} meta - Short id for which UI saved (e.g. "vintage")
-     * @returns {Promise<{ ok: boolean, local: boolean, remote: boolean, saveCode: string, remoteError?: string }>}
-     */
+
     global.saveWaysToDraw = function (payload, meta) {
         const saveCode = newSaveCode((meta && meta.source) || "unknown");
         const source = (meta && meta.source) || "unknown";

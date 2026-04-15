@@ -8,9 +8,7 @@
     const LEVER_TRIGGER = 40;
     const deckData = globalThis.WAYSTO_DECKS || {};
 
-    // Function to get current card height from a sample card
     function updateCardHeight() {
-        // Wait a bit for DOM to be fully rendered
         setTimeout(() => {
             const sampleCard = document.querySelector('.card');
             if (sampleCard) {
@@ -76,7 +74,7 @@
             const direction = index % 2 === 0 ? 1 : -1;
             reel.innerHTML = `
                 <h2 class="reel-title">${deck.label}</h2>
-                <div class="window">
+                <div class="window initial">
                     <div class="strip"></div>
                 </div>
                 <button type="button" class="lock-btn">Unlocked</button>
@@ -162,6 +160,8 @@
         });
 
         if (!activeSpins.length) return;
+
+        document.querySelectorAll('.window.initial').forEach(windowEl => windowEl.classList.remove('initial'));
 
         state.spinning = true;
         setDisabled(true);
@@ -302,12 +302,11 @@
     buildReels();
     updateCardHeight();
 
-    // Update card height on window resize
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
             updateCardHeight();
-        }, 250); // Debounce resize events
+        }, 250);
     });
 })();
