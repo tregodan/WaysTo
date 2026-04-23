@@ -1,14 +1,7 @@
-change unlocked/locked to lock, unlock
+let it open textbox for name/group name/initials/unique identifier - not required - after clicking save
 
-remove the save id, let it open textbox for name/group name/initials/unique identifier - not required - after clicking save
+add high score interface 
 
-high score interface
+the slot screens go black and then pop back in
 
-add a button to each section to enable or disable it- returns to logo state when not enforced
-make it go away like the constraints+ when disabled
-
-get rid of word title, the buttons go above so they dont disappear, "keep" outcomes - button state of pushed/unpushed rather than the green outline, put at top
-
-so title + lock/unlock button, and then "keep" button gets an unpressed/pressed state and that's what locks the outcome 
-
-text box instead of outcome box for them to brainstorm/ideate in the actual browser (ideas) - savable separate from the outcomes - refresh upon respin, auto save to left, when page refresh or closed delete
+when full screen there is only one slot on the bottom, they should be evenly spaced in one row or logically in two not just all on top with one on bottom
