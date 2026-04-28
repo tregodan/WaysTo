@@ -4,6 +4,4 @@ add high score interface
 
 fill empty space w/ high score/name/notes, move everything to left and have chart area to right
 
-left bulbs not clipping
-
 logo missing

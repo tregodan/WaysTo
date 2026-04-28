@@ -1,8 +1,8 @@
 (function () {
     "use strict";
 
-    const COPIES = 80; 
-    const MID_COPY = 40; 
+    const COPIES = 100; 
+    const MID_COPY = 50; 
     const LEVER_TRIGGER = 45;
     const CARD_H = 138;
 
@@ -23,6 +23,7 @@
         saveBtn:   document.getElementById("saveButton"),
         savedList: document.getElementById("savedList"),
         userName:  document.getElementById("userName"),
+        score:     document.getElementById("score"),
         note:      document.getElementById("ideationNote")
     };
 
@@ -113,7 +114,8 @@
                 values:    deck.values,
                 len:       deck.values.length, 
                 direction: i % 2 === 0 ? 1 : -1, 
-                isLocked:  () => locked
+                isLocked:  () => locked,
+                spinCount: 0
             });
         });
     }
@@ -129,8 +131,10 @@
         const tasks = state.reels.map((r, i) => {
             if (r.isLocked()) return Promise.resolve();
 
+            r.spinCount++;
+
             const endIdx   = Math.floor(Math.random() * r.len);
-            const rounds   = 15 + (i * 4);
+            const rounds   = 25 + (i * 4);
             const travel   = r.direction * (rounds * r.len + ((endIdx - r.currentIndex + r.len) % r.len));
             const duration = 2500 + (i * 800);
 
@@ -155,14 +159,28 @@
 
     function save() {
         if (state.spinning) return;
-        const result = state.reels.map(r => r.values[r.currentIndex]).join(" + ");
+        const result = state.reels.map(r => ({
+            value: r.values[r.currentIndex],
+            visible: !r.win.classList.contains("hidden"),
+            locked: r.isLocked(),
+            spinCount: r.spinCount
+        }));
+        const resultText = result.map(r => r.value).join(" + ");
         const name = els.userName.value || "ANONYMOUS";
+        const score = parseInt(els.score.value) || 0;
         const note = els.note.value     || "No notes.";
         
         const item = document.createElement("div");
         item.className = "save-item";
-        item.innerHTML = `<strong>${name}:</strong> ${result}<br><small>${note}</small>`;
-        els.savedList.prepend(item);
+        item.dataset.score = score;
+        item.innerHTML = `<strong>${name} (Score: ${score}):</strong> ${resultText}<br><small>${note}</small><br><small>Reel details: ${result.map(r => `${r.value} (${r.visible ? 'toggled' : 'untoggled'}, ${r.locked ? 'locked' : 'unlocked'}, re-spun ${r.spinCount} times)`).join('; ')}</small>`;
+        
+        // Insert in sorted order (highest score first)
+        const items = Array.from(els.savedList.children).filter(el => el.classList.contains("save-item"));
+        items.push(item);
+        items.sort((a, b) => parseInt(b.dataset.score) - parseInt(a.dataset.score));
+        els.savedList.innerHTML = '<h2>High Scores</h2>';
+        items.forEach(i => els.savedList.appendChild(i));
     }
 
     let startY = 0, angle = 0, dragging = false;
